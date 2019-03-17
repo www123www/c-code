@@ -1,0 +1,25 @@
+(2)把给定值e插入有序表中
+InsertList(List L,int i,elemType &e)
+{
+   if(L.length ==-1||i>L.length+1)
+  {
+  printf("full");
+  exit(1);
+for(int j = L.length; j>=i;j--)
+L.data[j+1]=L.data[j];
+L.data[i]=e;
+L.length++;
+  }
+}
+(3)删除值为e的所有数据元素
+void DelValueList(List L,elemtype &e)
+{
+   int i = 0;
+   int j;
+while(i<=L.length)
+if(L.data[i] == e){
+for(j=i;j<L.length;j++)
+L.data[j] = L.data[j+1];
+L.length--;
+}
+}

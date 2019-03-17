@@ -1,0 +1,36 @@
+2.（1）把给定值e插入有序表中
+template<class ElemType>
+status OrdSeqList<ElemType>::InsertElem(const ElemType &e)
+{
+     int i=length;
+     if(length==maxLength)
+     return OVER_FLOW;
+  else{
+      while(i>0 &&elems[i - 1]
+           elems[i]=elems[i - 1];
+           i--;
+}
+elems[i]=e;
+        length++;
+       return SUCCESS;
+    }
+} 
+
+
+(2)删除值为e的所有数据元素。
+template<class ElemType>
+void OrdSeqList<ElemType>::DeleteElem(ElemType e)
+{
+    int i=0, j;
+    while(i<=length - 1 &&elems[i]<e)
+     i++;
+if(i<=length - 1 && elems[i]==e) {
+     j=i+1;
+     while(j<=length - 1 && elems[j] ==e)
+     j++;
+     while(j<=length) {
+       elems[i++] = elems[j++];
+}
+   length = length + i - j;
+     }
+}

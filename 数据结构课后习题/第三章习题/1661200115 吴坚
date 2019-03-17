@@ -1,0 +1,58 @@
+应用题
+2.设计一个有序顺序表类(表中的数据元素按数据元素值递增有序),实现以下函数.
+ (1)把给定值e插入有序表中
+ (2)删除值为e的所以数据元素
+ 
+ (1)答:
+伪代码
+A 顺序表  e要插入的值  length 顺序表存储元素个数 MaxSize 顺序表最大容量
+Insert(A,e){
+ //判断顺序表容量是否满了
+ if length <MaxSize {//没满
+   
+  for i:=0 to length-1 {
+       j:=i+1
+      if i<e AND j>e{
+          //移动元素
+          for p:=length-1 to j{
+              A[p+1]:=A[p]
+          }
+         //插入元素
+          A[j]:=e
+          //退出循环
+          break 
+            }
+    }
+ } else  {
+   //满了
+}
+答:(2)
+思路：
+第一步：
+先记录值为e的元素个数
+第二步：找到开始删除的元素下标
+第三步：进行删除操作
+第四步：顺序表长度=顺序表长度-统计要删除数
+伪代码:
+DeleterAll_give_value(A,e){
+  count:=0
+  del_x:=0
+  for i:=0 to length-1 {
+      j:=i+1
+      if A[i]==e {
+       count:=count+1
+       //统计顺序表有多少要删的值
+      }
+      if A[i]!=e AND A[j]==e {
+       del_x=j 
+       //记录要开始删除的元素下标
+      }
+    
+  }
+  //删除元素
+  for y：=dex_x to length-count {
+      A[y]=A[y+count]
+  }
+  length:=length-count
+
+}

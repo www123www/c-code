@@ -1,0 +1,40 @@
+2.设计一个有序顺序表类，即表中的数据元素按数据元素值递增有序，实现以下函数。
+（1）把给定值e插入有序表中。
+
+template <class ElemType>
+Status SeqList <ElemType> ::InsertElem（const ElemType＆e）
+{
+	if（length == maxlength）
+	cout << "表已满";  //顺序表已满
+	if(i < 1 || >length + 1){
+	cout << "插入位置出错";
+        }
+        else{
+	for (j = length; j >= i; j--){
+		elems[j] = elems[j - 1];  //插入位置之后元素右移
+        }
+                elems[i - 1] = e;
+		length + 1；  //插入后个数加1
+			cout << "插入成功" << endl;
+	}
+}
+
+（2）删除值为e的所有数据元素。
+
+template <class ElemType>
+void SeqList <ElemType> ::DeleteElem（const ElemType＆e）
+{
+	int i = 0;
+	int j;
+	while (i <= length - 1 && elems[i] < e)
+	 i++;
+	if (i <= length - 1 && elems[i] == e) {
+	 j = i + 1;
+	 while (j <= length - 1 && elems[j] == e)
+	 j++;
+	 while (j <= length) {
+	   elems[i++] = elems[j++];
+}
+   length = length + i - j;
+	 }
+}

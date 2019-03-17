@@ -1,0 +1,123 @@
+﻿#include "pch.h"
+#include <iostream>
+using namespace std;
+class Seqlist
+{
+protected:
+	int length;		// 顺序表当前长度
+	int maxLength;	// 最大容量
+	int size;		//记录下标
+	int n[5] = { 1,3,7,9 }; //数组
+public:
+	Seqlist()
+	{
+		length = 4;
+		maxLength = 5;
+	}
+	void intser();  //插入
+	void show();	//显示当前数组元素
+	void Delete(); //删除
+
+};
+void Seqlist::intser()
+{
+	int a;
+	cin >> a;
+	if (length == maxLength)
+	{
+		cout << "数组已满，无法添加" << endl;
+	}
+	else
+	{
+		for (int i = 0; i <= length; i++)
+		{
+			if (a > n[i])
+			{
+				size = i;
+
+			}
+			else if (a <= n[i])
+			{
+				size = i;
+				break;
+			}
+			else
+			{
+				size = maxLength - 1;
+			}
+		}
+		//查找出需要插入的位置下标
+		for (int j = length; j >= size; j--)
+		{
+			n[j] = n[j - 1];
+		}
+		//将插入位置的数向右移
+		n[size] = a;
+		length++;
+		cout << "插入成功" << endl;
+
+	}
+}
+void Seqlist::Delete()
+{
+
+	{
+		if (length == 0)
+		{
+			cout << "数组为空" << endl;
+		}
+		else
+		{
+			int b;
+			cin >> b;
+			for (int i = 0; i <= length; i++)
+			{
+				if (b > n[i])
+				{
+					size = i;
+
+				}
+				else if (b <= n[i])
+				{
+					size = i;
+					break;
+				}
+				else
+				{
+					size = maxLength - 1;
+				}
+
+			}
+			//查找出需要删除的位置下标
+			for (int j = size; j < length; j++)
+			{
+				n[j] = n[j + 1];
+			}
+			//将插入位置的数向左移
+			length--;
+			cout << "删除成功" << endl;
+		}
+
+	}
+}
+void Seqlist::show()
+{
+	{
+		for (int i = 0; i <= length - 1; i++)
+		{
+			cout << n[i] << endl;
+		}
+
+	}
+}
+
+
+int main()
+{
+	Seqlist s;
+	s.intser();
+	s.show();
+	s.Delete();
+	s.show();
+	
+}

@@ -1,0 +1,191 @@
+p77：（四）应用题
+2.设计一个有序顺序表类（表中的数据元素按数据元素值递增有序），实现以下函数。
+ （1）把给定值ê插入有序表中
+void  Sqlist::Insert(int e) //定值插入
+{
+
+
+	if (length == MAXSIZE)  //判断是否到达最大值
+	{
+		cout << "通讯录位置已满" << endl;
+		return;
+	}
+	else
+	{
+		for (int j = 0; j < length; j++)     //从第1个开始查找
+
+			if (e < elem[j])         //判断e是否小于elem[j]  
+				{
+				for (int k = length; k >= j + 1; k--)   //是就将e插入到elem[j]，elem[j]到elem[length]的数位置向后移动变成elem[j+1]到elem[length+1]
+				{
+					elem[k] = elem[k - 1];
+				}elem[j] = e;
+				length++;       //计数加1
+				return;
+			}
+	}
+	elem[length] = e;   //插入的数大于顺序表中所有的数，直接插入在最后面；
+	length++;
+}
+ （2）删除值为?的所以数据元素
+void Sqlist::Delet(int e)//删除
+
+{
+
+
+
+
+	if (length <= 0)
+
+	{
+		cout << "顺序表不存在内容 " << endl;//判断链为不为空
+		return;
+	}
+	else {
+
+		for (int j = 0; j < length; j++)//从第1个开始查找
+		{
+			if (elem[j] == e)  //判断要删除的数
+			{
+				for (int k = j; k < length; k++)  //是进行删除，
+					elem[k] = elem[k + 1];
+				length--;
+				j--;      //删除后j位置的值改变，需要从新再次判断。
+			}
+		}
+	}
+}
+总体代码：
+#include <iostream>
+using namespace std;
+const int MAXSIZE = 5; 
+class Sqlist
+{
+private:
+	int  elem[MAXSIZE];
+	int length;
+public:
+	Sqlist(void);
+	~Sqlist() { };
+	void  SetData();
+	void  Insert(int e);
+	void Delet(int i);
+	void PrintOut();
+};
+void Sqlist::PrintOut()  //输出
+{
+
+
+	cout << "排序" << endl;
+	for (int k = 0; k < length; k++)
+	{
+		cout << elem[k] << "  ";
+	}
+}
+Sqlist::Sqlist() { length = 0; }
+void  Sqlist::SetData()     //初步建立顺序链 
+{
+	cout << "\n 输入个数length=" << endl;
+	cin >> length;
+	int a, b;
+	bool c = 0;
+	if (length <= MAXSIZE)
+	{
+		cout << "\n 请从小到大输入" << endl;
+		for (int i = 0; i < length; i++)
+		{
+			cout << "\n 输入：";
+			cin >> a;
+			if (c == 0)
+			{
+				c = 1;
+				b = a;
+				elem[i] = a;
+
+			}
+			else if (b <= a)
+			{
+				elem[i] = a;
+
+			}
+			else
+			{
+				cout << "\n 输入的数小于之前的数(不按规则输入)";
+				i--;
+			}
+
+
+
+
+		}
+	}
+	else cout << "\nlength is bigger than MAXSIZE";
+
+}
+void  Sqlist::Insert(int e) //定值插入
+{
+
+
+	if (length == MAXSIZE)  //判断是否到达最大值
+	{
+		cout << "通讯录位置已满" << endl;
+		return;
+	}
+	else
+	{
+		for (int j = 0; j < length; j++)     //从第1个开始查找
+
+			if (e < elem[j])         //判断e是否小于elem[j]  
+				{
+				for (int k = length; k >= j + 1; k--)   //是就将e插入到elem[j]，elem[j]到elem[length]的数位置向后移动变成elem[j+1]到elem[length+1]
+				{
+					elem[k] = elem[k - 1];
+				}elem[j] = e;
+				length++;       //计数加1
+				return;
+			}
+	}
+	elem[length] = e;   //插入的数大于顺序表中所有的数，直接插入在最后面；
+	length++;
+}
+void Sqlist::Delet(int e)//删除
+
+{
+
+
+
+
+	if (length <= 0)
+
+	{
+		cout << "顺序表不存在内容 " << endl;//判断链为不为空
+		return;
+	}
+	else {
+
+		for (int j = 0; j < length; j++)//从第1个开始查找
+		{
+			if (elem[j] == e)  //判断要删除的数
+			{
+				for (int k = j; k < length; k++)  //是进行删除，
+					elem[k] = elem[k + 1];
+				length--;
+				j--;      //删除后j位置的值改变，需要从新再次判断。
+			}
+		}
+	}
+}
+int main()
+{
+	Sqlist as;
+	as.SetData(); as.PrintOut();
+	int a;
+		cout << "输入要插入的数 " << endl;
+	cin >> a;
+	as.Insert(a); as.PrintOut();
+	cout << "输入要删除的数 " << endl;
+	cin >> a;
+	as.Delet(a); as.PrintOut();
+
+	return 0;
+}

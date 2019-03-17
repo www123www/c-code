@@ -1,0 +1,79 @@
+/*设计一个有序序列表，表中的数据元素按数据元素值递增有序，实现以下函数。例如:（1，1，2，2，3，4，4，0）
+  1、把给定值e插入有序表中
+  2、删除值为e的所有数据元素
+*/
+#include <iostream.h>
+#include <conio.h>
+//template<class ElemType>
+class SeqList
+{
+	protected:
+		int length;//当前长度
+		int maxlength;//最大容量
+		int *elems;
+	public:
+		SeqList(int v[],int size,int n)//根据数组内容构造顺序表,size=最大容量，n为当前容量
+		{
+			elems=new int[size];
+			maxlength=size;
+			length=n;
+			for(int i=0;i<length;i++)
+			{
+				elems[i]=v[i];
+			}
+		}
+		void cr(int e)
+		{
+			elems[length]=e;
+			length++;
+			for(int i=0;i<length;i++)
+			{
+				for(int j=0;j<length;j++)
+				{
+					if(elems[i]<elems[j])
+					{
+						int temp=elems[i];
+						elems[i]=elems[j];
+						elems[j]=temp;
+					}
+				}
+			}
+			for(int k=0;k<length;k++)
+			{
+				cout<<elems[k];
+			}
+		}
+		/*void xs()
+		{
+			for(int i=0;i<length;i++)
+			{
+				cout<<elems[i];
+			}
+		}*/
+		void sc(int e)
+		{
+			int m=0;//记录删除了多少个元素
+			for(int i=0;i<length;i++)
+			{
+				if(elems[i]==e)//判断数组中的值和传进来的值是否相同，如果相同则进行删除语句，然后length--。
+				{
+				}
+			}
+			for(int k=0;k<length;k++)//输出当前数组的值
+			{
+				cout<<elems[k];
+			}
+
+		}
+};
+int main()
+{
+	int table[7]={1,1,2,2,3,4,4};//1122344
+	SeqList Seq(table,8,7);//8是最大容量，7是当前容量
+	Seq.cr(5);
+	//Seq.xs();
+	//11223445
+	cout<<endl;
+	Seq.sc(1);
+	return 0;
+}

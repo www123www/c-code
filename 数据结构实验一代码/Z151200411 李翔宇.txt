@@ -1,0 +1,41 @@
+﻿void  Sqlist::Insert(int i, ElemType e) //请完成此函数
+{	
+	if (i > length)
+	{
+		cout <<  "超界" << endl;
+		return;
+	}
+	for (int j = length ;j > i -1 ;j--)
+	{
+		elem[j] = elem [j - 1];
+
+	}
+	length++;
+	elem[i-1] = e;
+	//程序填空1
+}
+ElemType Sqlist::Delet(int i)
+{
+	ElemType e ;
+	if (i < 1 || i > length)
+	{
+		cout << "错误" << endl;
+		e.numb = -1;
+		return e;
+	}
+	else 
+	{	
+		e = elem [i - 1];
+		for (int j = i; j < length; j++)
+			elem[j - 1] = elem[j];
+		length --;
+		cout<< "删除成功" << endl;
+		}
+	return e;
+	//程序填空2
+	
+		
+		/*length --;
+		cout<< "删除成功" << endl;*/
+	}
+	//程序填空2

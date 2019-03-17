@@ -1,0 +1,38 @@
+2.设计一个有序顺序表类，即表中的数据元素按数据元素值递增有序，实现以下函数
+（1）把给定值e插入有序表中。
+
+void  Insert(int arr[], int length, int ) //若数组未存满，插入到最后一个在进行排序
+{
+	if(length==MAXSIZE){
+		cout<<"数组已满"<<endl;
+	}else{
+		arr[lenggth]=e;
+		length++;
+	}
+	sort(arr,arr+length);
+}
+
+
+（2）删除值为e的所有数据元素。
+
+void del_num(int arr[], int length, int e)  //删除指定元素，循环删除
+{
+	int a = 1;
+	for (int i = 0; i < length; i++)
+	{
+		for (int a = 0; a < length; a++)
+		{
+			if (arr[i] == e) {
+				for (int j = i; j < length; j++) {
+					arr[j] = arr[j + 1];
+				}
+				length--;
+			}
+		}
+	}
+	cout << "删除后数组元素如下所示:" << endl;
+	for (int i = 0; i < length; i++)
+	{
+		cout << arr[i] << " ";
+	}
+}

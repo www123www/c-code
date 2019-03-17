@@ -1,0 +1,166 @@
+1.将一个大写字母转换为小写字母
+代码：
+char upperCaseToLowerCase(char ch) {
+	if (ch > 'A'&&ch < 'Z') {
+		ch = ch +32;
+	}
+	return ch;
+}
+
+2.计算一个整数的数字之和
+代码：
+int sumDigits(long n) {
+	int sum = 0;
+	while (n != 0) {
+		sum += n % 10;
+		n /= 10;
+	}
+	return sum;
+}
+3.返回一个整数逆序
+例如 3456 应该返回 6543
+代码：
+int reverse(int num) {
+	int re_num=0;
+	while (num!=0)
+	{
+	    int c = num % 10;
+		re_num +=c;
+		num /= 10;
+		if(num>0)re_num *= 10;
+		
+	}
+	return re_num;
+}
+
+4.求最大公约数
+代码：
+int gcd(int M, int N) {
+	
+	int R= M % N;//余数
+	if (R == 0) {
+		return N;
+	}
+	else return gcd(N, R);
+
+}
+5.编写一个程序，满足如下要求： 声明一个函数，判断一个整数是否是素数
+素数指整数在一个大于1的自然数中，除了1和此整数自身外，没法被其他自然数整除的数。
+
+找出前1000 个素数 ，每行打印10个
+代码：
+bool isPrime(int num) {
+	int count = 2;
+	for (int i = 2; i < num; i++)
+		if (num%i == 0) {
+			count++;
+			break;
+		}
+
+	if (count == 2)return true;
+	else return false;
+}
+6.emirp(素数英文prime 逆序)是一种素数，将其反转仍是素数.
+编写程序，输出前100个emirp，每行显示10个
+代码：
+#include <iostream>
+#include <iomanip>
+bool isPrime(int num);
+bool isEmirp(int num);
+
+using namespace std;
+int main() {
+	int ln_count = 0, count = 0;
+	for (int i = 2;; i++) {
+		if (isEmirp(i)) {
+			ln_count++,count++;
+			cout << setw(4) << i << " ";
+			if (ln_count == 10) {
+				ln_count =0;
+				cout << endl;
+			}
+
+		}
+		if (count == 100)break;
+	}
+	return 0;
+}
+bool isPrime(int num) {
+	int count = 2;
+	for (int i = 2; i < num; i++)
+		if (num%i == 0) {
+			count++;
+			break;
+		}
+
+	if (count == 2)return true;
+	else return false;
+	
+}
+bool isEmirp(int num) {
+	int num_=0;
+	int n = num;
+	while (n != 0) {
+		num_+=n % 10;
+		n /= 10;
+		if(n>0)num_ *= 10;
+		
+	}
+	
+	if (isPrime(num_)&&isPrime(num))return true;
+	return false;
+}
+7.回文素数，就是既是素数，其文字形式又为回文，例如，131是素数，又是回文。
+编写一个程序，输出前100个回文素数，每行打印10个
+思路：第一步 判断素数 / 第二步 在数字是素数的情况下，判断是否是回文数
+ 判断回文数方法是 将数字逆序，逆序后的数字跟逆序前的数字的数值一样
+ 代码：
+ #include <iostream>
+#include <iomanip>
+bool isPrime(int num);
+bool is_renumber(int num);
+using namespace std;
+int main() {
+	int ln_count = 0, count = 0;
+	for (int i = 2;; i++) {
+		if (is_renumber(i)) {
+			ln_count++,count++;
+			cout << setw(3) << i << " ";
+			if (ln_count == 10) {
+				ln_count =0;
+				cout << endl;
+			}
+
+		}
+		if (count == 100)break;
+	}
+	return 0;
+}
+bool isPrime(int num) {
+	int count = 2;
+	for (int i = 2; i < num; i++)
+		if (num%i == 0) {
+			count++;
+			break;
+		}
+
+	if (count == 2)return true;
+	else return false;
+	
+}
+
+
+bool is_renumber(int num) {
+	int _num = 0, n = num;
+	
+	while (n != 0) {
+		int c = n % 10; 
+		n /= 10;
+		if (n > 0)_num = (c + _num) * 10;
+		else _num += c;		
+	}
+
+	if (_num == num&&isPrime(num))return true;
+	return false;
+	
+}

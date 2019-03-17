@@ -1,0 +1,58 @@
+//// shujujiegou.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+#include "pch.h";
+#include <iostream>
+#include<algorithm>
+using namespace std;
+
+void show(int arr[], int l) {
+	cout << "\n数组如下所示" << endl;
+	for (int i = 0; i < l; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+void del_num(int arr[], int length, int e)
+{
+	int a = 1;
+	for (int i = 0; i < length; i++)
+	{
+		for (int a = 0; a < length; a++)
+		{
+			if (arr[i] == e) {
+				for (int j = i; j < length; j++) {
+					arr[j] = arr[j + 1];
+				}
+				length--;
+			}
+		}
+	}
+	cout << "删除后数组元素如下所示:" << endl;
+	for (int i = 0; i < length; i++)
+	{
+		cout << arr[i] << " ";
+	}
+}
+void insert_num(int arr[], int length, int e) {
+	arr[length] = e;
+	length++;
+	sort(arr, arr + length);
+	for (int i = 0; i < length; i++)
+	{
+		cout << arr[i] << " ";
+	}
+}
+int main()
+{
+	int arr[8] = { 1,5,5,5,8,20,25 };
+	int arr1[8] = { 1,5,6,7,8,18,25 };
+	show(arr, 8);
+	int e, a;
+	cout << "请输入要删除的指定数据" << endl;
+	cin >> e;
+	del_num(arr, 8, e);
+	show(arr1, 8);
+	cout << "\n请输入要插入的数据" << endl;
+	cin >> a;
+	insert_num(arr1, 7, a);
+};

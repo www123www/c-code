@@ -1,0 +1,40 @@
+int j=1;
+if（j==1）;                //新节接点插入在表头
+{
+cout<<"OVER_FLOW"<<endl;  //顺序表满，返回OVER_FLOW
+}
+else{
+for(int j=1;j >=i;j--){
+                          //插入位置之后元素右移
+}
+elems[i-1]=e;
+1++;                 //插入元是元素个数加1
+return success;          //插入成功
+}
+}
+
+ （2）删除值为e的所有数据元素
+template<class ElemType>
+Status LinkList<ElemType>::DeleteElem(int i ,ElemType &e)
+{
+int p,e;
+if(i==1)                           //删除表的滴哟个结点
+{
+e=&e                              //指向第一个接点
+if(e!=NULL) e=e->Next            //从表中删除
+else(e);                         //释放被删除的接点
+free   &e；
+return p;
+}
+p=Findkth(i-1,p);
+if(p==Null)
+{
+printf（“删除的接点不存在”，i-1）；return NULL；
+}
+else if(p->Next==NULL)
+eles{
+e=p->Next;                                     //e指向i个接点
+p->Next=e->Next;                              //从表中删除
+free(e);                                    //删除接点
+return p;
+}

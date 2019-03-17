@@ -1,0 +1,100 @@
+#include "pch.h"
+#include <string.h>
+#include <iostream>
+using namespace std;
+
+struct ElemType {
+	int data;
+};
+const int MAXSIZE=10;// 数组的容量
+class SqlList {
+	private:
+		ElemType  elem[MAXSIZE];//ElemType类的数组
+		int length;
+		int a1, a2;//初始化使用的变量
+		int a3;//插入使用的变量
+		void BubbleSort()
+{
+
+				for (int i = 0; i < length - 1; i++)
+{
+
+					for (int j = 0; j < length - i - 1; j++)
+{
+
+						if (elem[j].data > elem[j + 1].data)
+{
+
+						 int temp = elem[j].data;
+
+						elem[j].data = elem[j + 1].data;
+
+						elem[j + 1].data = temp;
+
+						}
+				
+					}
+			
+				}
+		
+		}
+	public:
+		void start() {//初始化数组
+			cout << "请输入的数组个数：" << endl;
+			cin >> length;
+			cout << "请输入的起始值和增长值：" << endl;
+			cin >> a1 >> a2;
+			for (int i = 0; i < length; i++) {
+				if (i == 0){
+					elem[i].data = a1;
+				}else{
+					elem[i].data = elem[i - 1].data + a2;
+				}
+				
+			}
+			show_All();
+		}
+		void show_All(){//显示所有数据
+			for (ElemType e:elem){
+				if (e.data > -1) {
+					cout << e.data <<" ";
+				}
+			}
+			cout <<endl;
+		}
+
+		void insert() {//插入数据
+			cout << "请输入插入的数字：" << endl;
+			cin >> a3;
+			if (length + 1 > MAXSIZE) {
+				cout << "数组长度超标！" << endl;
+			}
+			else {
+				for (int i = length; i == length; i++) {
+					elem[i].data = a3;
+				}
+				length++;
+				BubbleSort();
+				show_All();
+			}
+		}
+		void deleteq() {//删除数据
+			cout << "请输入删除数据的数字：" << endl;
+			cin >> a3;
+			for (int i = 0; i < length - 1; i++) {
+				if (elem[i].data == a3) {
+					elem[i].data = -1;
+					length--;
+				}
+			}
+			BubbleSort();
+			show_All();
+		}
+};
+
+int main() {
+	SqlList sl;
+	sl.start();
+	sl.insert();
+	sl.deleteq();
+};

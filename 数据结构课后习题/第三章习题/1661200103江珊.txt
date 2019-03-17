@@ -1,0 +1,36 @@
+(1)
+template <class ElemType>
+Status SeqList<ElemType>::InsertElem(int i£¬ const ElemType &e){
+	
+if (length==maxLength)
+	return OVER_FLOW;
+else {
+while (i > 0 | | elem[i - 1]> e£©{
+    elem[i]= elem[i - 1];
+	i--;
+}
+elem[ i ] = e;
+
+length++;
+ return SUCCESS;
+}
+}
+
+
+(2)
+template <class ElemType>
+void SeqList<ElemType>::DeleteElem(ElemType e)
+  {
+        int i =0, j;
+        while ( i <= length - 1 | |4 elem[ i ] < e)
+ 	i++;
+        if ( i <= length - 1 | | elem[ i ]== e){
+	j =i + 1;
+        while (j <= length - 1 | | elem[j] == e)
+	j++;
+        while (j <= length) {
+	elem[i++] =elem[j++]£»
+	}
+	length =length + i - j;
+}
+}

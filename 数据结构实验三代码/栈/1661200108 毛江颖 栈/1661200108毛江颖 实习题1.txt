@@ -1,0 +1,105 @@
+#include "pch.h"
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+typedef char  ElemType;     // 数据元素的类型
+const int Maxsize = 100;     // 数组的容量
+class Seqstack
+{
+private:
+	ElemType  elem[Maxsize];
+	int top;
+public:
+	Seqstack();//构造函数
+	void	push(ElemType e);	//入栈
+	ElemType pop();//出栈
+	int IsEmpty();	//判断是否为空
+	void panduan(string str);	//判断括号是否匹配
+	void PrintOut();//输出栈内元素
+	char getTop();//获取栈顶元素
+};
+
+Seqstack::Seqstack()//构造函数
+{
+	top = -1;  //默认为-1
+};
+
+void Seqstack::push(ElemType e)  //入栈
+{
+	if (top + 1 < Maxsize) { //判断栈是否存满
+		top++;
+		elem[top] = e;
+	}
+	else {
+		return;
+	}
+}
+
+ElemType Seqstack::pop()//出栈
+{
+	if (IsEmpty() != true) {
+		return elem[top--];
+	}
+	else return -1;
+}
+
+int Seqstack::IsEmpty()//判断是否为空
+{
+	if (top == -1)
+		return true;
+	else
+		return false;
+}
+
+void Seqstack::panduan(string str)//判断括号是否匹配
+{
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (str[i] == '(') {//如果为左括号则入栈，其他元素不入栈
+			push(str[i]);//入栈
+		}
+		else {
+			if (str[i] == ')'&&getTop() == '(') {//判断是否有相应的左括号与右括号匹配
+				pop(); //匹配则出栈，继续循环判断其他括号
+				continue;
+			}
+			else {
+				top = 1;//若不匹配，让栈不为空
+			}
+		}
+	}
+	if (IsEmpty() == true) {
+		cout << "匹配" << endl;//如果栈为空则匹配
+	}
+	else {
+		cout << "不匹配" << endl;
+	}
+}
+
+void Seqstack::PrintOut()//输出栈内元素
+{
+	int k;
+	cout << "\n PrintOut Data:\n";
+	for (k = top; k >= 0; k--)
+		cout << setw(6) << elem[k];
+	cout << endl;
+}
+//获取栈顶元素
+char Seqstack::getTop()
+{
+	if (IsEmpty() != true) {
+		return elem[top];
+	}
+}
+
+int main()
+{
+	Seqstack L;
+	cout << "请输入一个表达式" << endl;
+	string ss;
+	cin >> ss;
+	L.panduan(ss);
+	return 0;
+}

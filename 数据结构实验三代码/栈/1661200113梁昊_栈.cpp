@@ -1,13 +1,13 @@
-//Õ»µÄË³Ğò´æ´¢½á¹¹£¬Ë³Ğò±íÀà
+//æ ˆçš„é¡ºåºå­˜å‚¨ç»“æ„ï¼Œé¡ºåºè¡¨ç±»
 #include<iostream>
 #include<conio.h>
 #include <iomanip>
 #include <string>
 using namespace std;
-//------------------------------Õ»µÄË³Ğò´æ´¢½á¹¹---------------------------------------------
-typedef char  ElemType;     // Êı¾İÔªËØµÄÀàĞÍ
+//------------------------------æ ˆçš„é¡ºåºå­˜å‚¨ç»“æ„---------------------------------------------
+typedef char  ElemType;     // æ•°æ®å…ƒç´ çš„ç±»å‹
 typedef string  FlemType;
-const int MAXSIZE=10;     // Êı×éµÄÈİÁ¿
+const int MAXSIZE=10;     // æ•°ç»„çš„å®¹é‡
 class SqStack
   { private:
       ElemType  elem[MAXSIZE];
@@ -80,7 +80,7 @@ void  SqStack::push(string f)
 }
 ElemType SqStack::pop()
  {
-//½«´Ë³ÉÔ±º¯Êı²¹³äÍêÕû£¬Ê¹µÃ³ÌĞòÄÜ¹»ÕıÈ·ÔËĞĞ
+//å°†æ­¤æˆå‘˜å‡½æ•°è¡¥å……å®Œæ•´ï¼Œä½¿å¾—ç¨‹åºèƒ½å¤Ÿæ­£ç¡®è¿è¡Œ
 	 ElemType e;
 	 if(IsEmpty())
 	 {
@@ -107,31 +107,31 @@ int main(int argc, char* argv[])
   ElemType e,x;
   string f;
   SqStack  as;
-   cout<<"\n                           Õ»µÄË³Ğò´æ´¢½á¹¹ÊµÏÖ";
+   cout<<"\n                           æ ˆçš„é¡ºåºå­˜å‚¨ç»“æ„å®ç°";
   do{
     cout<<"\n\n";
-    cout<<"\n\n    1.²åÈëÒ»¸öÊı¾İÔªËØe£¨ÈëÕ»£©";
-    cout<<"\n\n    2.É¾³ıÒ»¸öÔªËØ£¬·µ»ØÆäÖµ£¨³öÕ»£©";
-    cout<<"\n\n    3..½áÊø³ÌĞò";
+    cout<<"\n\n    1.æ’å…¥ä¸€ä¸ªæ•°æ®å…ƒç´ eï¼ˆå…¥æ ˆï¼‰";
+    cout<<"\n\n    2.åˆ é™¤ä¸€ä¸ªå…ƒç´ ï¼Œè¿”å›å…¶å€¼ï¼ˆå‡ºæ ˆï¼‰";
+    cout<<"\n\n    3..ç»“æŸç¨‹åº";
     cout<<"\n******************************** ";
-    cout<<"\n    ÇëÊäÈëÄãµÄÑ¡Ôñ(1,2,3,4,5,6)";    cin>>k;
+    cout<<"\n    è¯·è¾“å…¥ä½ çš„é€‰æ‹©(1,2,3,4,5,6)";    cin>>k;
     switch(k){
-       case 1:{cout<<"\n ÈëÕ»£¬Êı¾İ e=";
+       case 1:{cout<<"\n å…¥æ ˆï¼Œæ•°æ® e=";
                cin>>f;
                as.push(f);
                //as.PrintOut();
               }break;
-       case 2:{  cout<<"\n ³öÕ»";
+       case 2:{  cout<<"\n å‡ºæ ˆ";
                  x=as.pop();
-                 cout<<"\n  ³öÕ»ÔªËØÊıÖµ= "<<x;
+                 cout<<"\n  å‡ºæ ˆå…ƒç´ æ•°å€¼= "<<x;
                   as.PrintOut();
              }break;
        default:break;
          } //switch
      cout<<"\n--------------------------------- ";
     }while(k>=1&&k<3);
-  cout<<"\n          ÔÙ¼û!";
-  cout<<"\n     °´ÈÎÒâ¼ü£¬·µ»Ø¡£";
+  cout<<"\n          å†è§!";
+  cout<<"\n     æŒ‰ä»»æ„é”®ï¼Œè¿”å›ã€‚";
   _getch(); return 0;
 }
 //-----------------------------------------------

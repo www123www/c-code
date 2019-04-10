@@ -1,0 +1,109 @@
+#include "pch.h"
+#include <iostream>
+#include <conio.h>
+#include <iomanip>
+#include <string>
+using namespace std;
+//------------------------------栈的顺序存储结构---------------------------------------------
+typedef char  ElemType;     // 数据元素的类型
+const int MAXSIZE = 10;     // 数组的容量
+
+
+class SqStack
+{
+private:
+	ElemType elem[MAXSIZE];
+	int top;
+public:
+
+	SqStack(void);
+	~SqStack() {};
+	int  SetEmpty();
+	void  push(ElemType e);
+	ElemType pop();
+	void PrintOut();
+	int IsEmpty(void)const;
+};
+//-------------------------------------------------------------
+SqStack::SqStack(void) :top(0) {}
+int  SqStack::SetEmpty()
+{
+	return top == 0;
+}
+void  SqStack::push(ElemType e)//入栈
+{
+	//将此成员函数补充完整，使得程序能够正确运行
+	if (top != MAXSIZE) {
+		elem[top++] = e;
+	}
+	else {
+		cout << "栈已满" << endl;
+	}
+}
+ElemType SqStack::pop()//出栈
+{
+	//将此成员函数补充完整，使得程序能够正确运行
+	ElemType e;
+	if (!IsEmpty()) {
+		e = elem[--top];
+		return e;
+	}
+	else {
+		e = -1;
+		return e;
+	}
+
+}
+void SqStack::PrintOut()
+{
+	int k;
+	for (k = 0; k < top; k++) {
+		if (elem[k] >= 0) {
+			cout << setw(5) << elem[k];
+		}
+		else {
+			continue;
+		}
+
+	}
+
+
+	cout << endl;
+}
+int SqStack::IsEmpty(void)const
+{
+	if (top == 0) return 1;
+	else return 0;
+}
+//-----------------------------------------------
+int main()
+{
+	string a = " ";
+	ElemType b, x;
+	SqStack  sq;
+	cout << "请键盘输入左右大括号：" << endl;
+	cin >> a;
+	for (int i = 0; i < a.size(); i++) {
+
+
+		if (a[i] == '{') {
+			b = a[i];
+			sq.push(b);
+		}
+		else if (a[i] == '}') {
+			b = a[i];
+			x = sq.pop();
+		}
+		else {
+			break;
+		}
+	}
+
+	if (sq.IsEmpty() == 1 && x != '#') {
+		cout << "Yes" << endl;
+	}
+	else {
+		cout << "No" << endl;
+	}
+	_getch(); return 0;
+}

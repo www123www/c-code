@@ -1,0 +1,149 @@
+#include "pch.h"
+#include "String.h"
+#include <string.h>
+
+#include <iostream>
+
+using namespace std;
+           class String
+{          public:
+          String(){};
+        ~String(){};
+         String SubString(int pos,int num);
+         void Insert(String t,int pos);
+         void Delete(int pos,int num);
+         void Creat();
+         void Display();
+   private:
+        char *str;
+        int size;
+ };
+
+
+//生成新字符串函数
+void String::Creat()
+{
+	char *s = new char(100);
+	cin >> s;
+	size = strlen(s);
+	str = new char[size];
+	if (str == 0)  cout << "没有申请到空间！";
+	strcpy(str, s);
+}
+//输出
+void String::Display()
+{
+	int i;
+	for (i = 0; i < size; i++)  cout << str[i];
+	cout << endl;
+}
+//求子串
+String String::SubString(int pos, int num)
+{    //位置pos 从0开始算
+	String t;
+	t.str= new char[num + 1];
+	t.size = num;
+	if (  pos>=0  && pos <  size&&
+		  num>0   && num <= size&&
+		  pos+num<=size
+		){
+		for (int j=0,i = pos; i <size,j<num; i++) {
+			//从pos位置取num个字符拷贝到新char数组
+			t.str[j++] = str[i];
+	   }
+
+	}
+	else {
+		cout << "输入的位置或数目异常" << endl;
+		t.str = NULL;
+		t.size = 0;
+	}
+	return t;
+
+}
+//插入运算:在串对象s的pos位置后插入一个串t
+void String::Insert(String t, int pos)
+{   
+	//位置pos 从0开始算
+	
+	
+	if (pos>=0&&pos<size) {
+		//将pos位置后的串后移t.size
+		for (int i = size - 1 + t.size, j = size - 1; j >= pos; i--, j--) {
+			str[i] = str[j];
+
+		}
+
+		//插入操作
+		for (int y = 0, i = pos; y < t.size; i++) {
+			str[i] = t.str[y++];
+		}
+		//更新size
+		size = size + t.size;
+	}
+	else {
+		cout << "位置有异常";
+	}
+	
+}
+//删除 :删除串中的一个子串
+void  String::Delete(int pos, int num)
+{   //位置pos 从0开始算
+	if (pos >= 0 && pos < size  &&
+		num>0 && num <= size &&
+		pos + num <= size) {
+		//判断位置，数目合法性
+		//将位置pos，数目为num的子串的后面子串往前移
+		for (int i = pos, j = pos + num;j<size; i++,j++) {
+			str[i] = str[j];
+		}
+		//更新size
+		size = size - num;
+	}
+	else {
+
+		cout << "位置有异常";
+	}
+//主函数
+int main(int argc, char* argv[])
+{  int pos,num,k;
+   String s,s1,t;
+   do{  cout<<"\n\n    1.生成字符串"  ;
+        cout<<"\n\n    2.取子串";
+        cout<<"\n\n    3.插入子串s1";
+        cout<<"\n\n    4.删除子串";
+        cout<<"\n\n    5.结束程序";
+        cout<<"\n******************************** ";
+        cout<<"\n    请输入你的选择(1,2,3,4,5)";  cin>>k;
+  switch(k){
+       case 1:{cout<<"请输入一个字符串：";
+               s.Creat();
+               cout<<"字符串为：       ";     s.Display();
+              }break;
+       case 2:{ cout<<"请输入子串的截取位置pos及子串长度num"<<endl;
+                cin>>pos>>num;
+                t=s.SubString(pos,num);
+                cout<<"你所取的子串为：　　";  t.Display();
+               }break;
+       case 3:{ cout<<"请输入子串插入位置pos"<<endl;
+                cin>>pos;
+                cout<<"请输入要插入的子串:  ";   s1.Creat();
+                s.Insert(s1,pos);
+                cout<<"插入后的字符串为：   ";  s.Display();
+              }break;
+       case 4:{ cout<<"请输入要删除子串的开始位置pos及子串长度num"<<endl;
+               cin>>pos>>num;
+               s.Delete(pos,num);
+               cout<<"删除后的字符串为：   ";
+               s.Display();
+             }break;
+     default:break;
+  } //switch
+     cout<<"\n--------------------------------- ";
+}while(k>=1&&k<5);
+  cout<<"\n          再见!";
+  cout<<"\n     按任意键，返回。";
+  return 0;
+}
+
+	

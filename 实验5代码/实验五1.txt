@@ -1,0 +1,207 @@
+// 二叉树.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+
+
+/*int _tmain(int argc, _TCHAR* argv[])
+{
+	return 0;
+}*/
+
+#include <iostream>
+#include <conio.h>
+#include <stdlib.h>
+using namespace std;
+typedef int ElemType;
+struct NodeType       	                    //定义结点 结构体
+{
+	ElemType   data;
+	NodeType  *lch, *rch;
+};
+int count = 0; //用来统计叶子节点的个数
+class BiTree    	                     //定义 二叉树类 class
+{
+public:
+	//int count = 0; //用来统计叶子节点的个数
+	BiTree() { root = NULL; };                    //构造函数
+	~BiTree() { destroy(root); }                  //析构函数
+	void inorder()                            //中序遍历
+	{
+		inorder(root);
+	}
+	void preordertswap()                       //利用先序遍历方法   交换左右子树
+	{
+		preorderswap(root);
+	}
+	int  leaf()                             //求树中叶子节点的个数
+	{
+		return leaf(root);
+	}
+	void Levelorder()  //层次遍历
+	{
+		return Levelorder(root);
+	}
+	void PostOrder() //后序遍历
+	{
+		return PostOrder(root);
+	}
+	void creat0();
+private:
+	NodeType *root;                                    //数据成员，树根
+	NodeType *creat();                                //建立二叉树递归方法
+	void inorder(NodeType *p);                  //中序遍历
+	void PostOrder(NodeType * p);            //后序遍历
+	void preorderswap(NodeType *p);       //利用先序遍历方法交换左右子树
+	int leaf(NodeType *p);	                          //求二叉树中叶子节点的个数
+	void Levelorder(NodeType *p);        //层次遍历
+	void  destroy(NodeType* &p);             //删除二叉树所有结点
+};
+
+void  BiTree::creat0()                          //建立树函数，
+{
+	cout << "请按照树的先序遍历顺序组织数据" << endl;
+	cout << "若结点信息是int，把每个结点的空孩子以0输入;" << endl;
+	cout << "一个结点的二叉树11，输入：11 0 0;" << endl;
+	root = creat();                            //调用私有creat();
+}
+
+NodeType * BiTree::creat()                      //递归建立二叉树算法
+{
+	NodeType *p;
+	ElemType x;
+	cout << "\n 输入数据：";
+	cin >> x;
+	if (x == 0)
+		p = NULL;
+	else {
+		p = new NodeType;
+		p->data = x;
+		p->lch = creat();                  //递归调用自身
+		p->rch = creat();
+	}
+	return p;
+}
+
+void BiTree::preorderswap(NodeType *p)         //利用先序遍历方法交换左右子树
+{
+	if (p != NULL)
+	{
+		NodeType *r;
+		r = p->lch;
+		p->lch = p->rch;
+		p->rch = r;
+		//上面几条语句可以认为对结点的访问（交换左右孩子）
+		//替换了原来的： cout<<p->data<<" ";  语句
+		preorderswap(p->lch);
+		preorderswap(p->rch);
+	}
+}
+
+void BiTree::inorder(NodeType *p)             //中序遍历   左中右
+{
+	if (p != NULL) {
+		inorder(p->lch);   //左子树
+		cout << p->data << " "; 
+		inorder(p->rch);  //右子树
+	}
+}
+
+void BiTree::PostOrder(NodeType *p)  //后序遍历 左右根
+{
+	if (p != NULL) {
+		PostOrder(p->lch);
+		PostOrder(p->rch);
+		cout << p->data << " ";
+	}
+}
+
+void  BiTree::destroy(NodeType* &p)  //删除二叉树所有结点
+{
+	if (p != NULL)
+	{
+		destroy(p->lch);
+		destroy(p->rch);
+		delete p;
+		p = NULL;
+	}
+}
+
+int BiTree::leaf(NodeType *p)                //求二叉树中叶子节点的个数
+{
+	if (p != NULL) {
+		if (p->lch == NULL && p->rch == NULL) {   //当左子树和右子树为空时
+			cout << p->data << " ";
+			count++;
+			//return 1;
+		}
+		leaf(p->lch);
+		leaf(p->rch);
+	}
+	return count;
+	//return leaf(p->lch)+leaf(p->rch);
+}
+
+void  BiTree::Levelorder(NodeType *p)  //层序遍历，数组实现                1                 层次：1234567
+{                                                              //     2          3
+	NodeType *temp[100];  //NodeType 类型的指针数组                4     5   6    7
+	int in = 0;                                                
+	int out = 0;                 
+	temp[in++] = p; //保存二叉树根节点 
+	while (in > out)   //始终能找到二叉树当前遍历的节点与前一个节点
+	{  // 1   0     3 1        5 2           7 3         9 4           11 5           13 6  
+		if (temp[out])//不为空，输出
+		{                                                           // 0 1 2 3 4 5 6
+			cout << temp[out]->data << "  ";  // 1 2 3 4 5 6 7
+			temp[in++] = temp[out]->lch;       //temp[1]=2   temp[3]=4   temp[5]=6
+			temp[in++] = temp[out]->rch;      //temp[2]=3    temp[4]=5   temp[6]=7
+		}
+		out++;        //1 2 3 4 5
+	}
+}
+
+int main()
+{
+	int k;     BiTree root0;                     //声明创建二叉树对象，调用构造函数
+	do {
+		cout << "\n\n";
+		cout << "\n\n     1. 建立二叉树";
+		cout << "\n\n     2. 交换左右子树 ";
+		cout << "\n\n     3. 求二叉树中叶子节点的个数  ";
+		cout << "\n\n     4. 中序遍历 ";
+		cout << "\n\n     5. 层次遍历 ";
+		cout << "\n\n     6. 结束程序运行";
+		cout << "\n======================================";
+		cout << "\n     请输入您的选择 (0,1,2,3,4,5,6):"; cin >> k;
+		switch (k)
+		{
+		case 1: {  cout << "\n  s输入（0 0）结束：";
+			root0.creat0();
+			cout << "\n     中序遍历结果：";
+			root0.inorder();
+		} break;
+		case 2: {  cout << "\n     交换左右子树结果：";
+			root0.preordertswap();
+			cout << "\n     中先根遍历结果：";
+			root0.inorder();
+		} break;
+		case 3: {   int number;
+			cout << "  叶节点为：";
+			number = root0.leaf();
+			cout << "\n  叶子节点的个数是：" << number;
+		} break;
+		case 4: {
+			cout << "中序遍历结果(左中右)";
+			root0.inorder();
+		}break;
+		case 5: {
+			cout << "层次遍历结果"<<endl;
+			root0.Levelorder();
+		}break;
+		case 6:exit(0);
+		} //  switch
+		cout << "\n ----------------";
+	} while (k >= 0 && k < 6);
+	_getch();   return 0;
+}
+

@@ -1,100 +1,81 @@
-跳到内容
- 
-Search or jump to…
-
-拉请求
-问题
-市井
-探索
- 
-@yangdebang 
-1
-0 0 www123www / c-code
- 代码 问题0 拉取请求0 项目 0 Wiki 见解   
-c-code /数据结构实验四代码 /1661200125冯大勇串.txt
-@BruceFWyane BruceFWyane 通过上传
-e9a4123 添加文件
-3 days ago
-134行（127 sloc）  3.21 KB
-    
 #include <iostream.h>
 #include <conio.h>
 #include <string.h>
 class String
-{上市：
-     串（）{};
-     〜字符串（）{};
-     String SubString（int pos，int num）;
-     void Insert（String t，int pos）;
-     void Delete（int pos，int num）;
-     void Creat（）;
-     void Display（）;
-  私人的：
-     char * str;
+{public:
+     String(){};
+     ~String(){};
+     String SubString(int pos,int num);
+     void Insert(String t,int pos);
+     void Delete(int pos,int num);
+     void Creat();
+     void Display();
+  private:
+     char *str;
      int size;
  };
  //生成新字符串函数
-void String :: Creat（）
- {char * s = new char（100）; 
-   CIN >> S;
-    大小= strlen的（一个或多个）;
-    str = new char [size];
-    if（str == 0）cout <<“没有申请到空间！”;
-    的strcpy（STR，S）;
+void String:: Creat()
+ { char *s=new char(100); 
+   cin>>s;
+    size=strlen(s);
+    str=new char[size];
+    if(str==0)  cout<<"没有申请到空间！";
+    strcpy(str,s);
  }
 //输出
-void String :: Display（）
-{int i;
-  for（i = 0; i <size; i ++）cout << str [i];
-  COUT << ENDL;
+void String::Display()
+{ int i;
+  for(i=0;i<size;i++)  cout<<str[i];
+  cout<<endl;
 }
 //求子串
-String String :: SubString（int pos，int num）
+String String::SubString(int pos,int num)
 { 
 //将此成员函数补充完整，使得程序能够正确运行
 
-字符串t;
-	int i，j;
-	if（（pos> 0 && pos <= size）&&（num> = 0 && pos + num <= size + 1））//按你的程序应该是处理输入正常的情况
+String t;
+	int i,j;
+	if ((pos > 0 && pos <= size) && (num >= 0 && pos + num <= size + 1)) //按你的程序应该是处理输入正常的情况
 	{
-		t.str = new char [num + 1]; //先申请空间
+		t.str = new char[num + 1];//先申请空间
 		t.size = num;
-		for（i = 0，j = pos  -  1; i <i + ++，j ++）
+		for ( i = 0, j = pos - 1; i < num; i++, j++)
 		{
-			t.str [i] = str [j]; // str部分复制到tem.str;
+			t.str[i] = str[j ];//str部分复制到tem.str；
 		}
 	}
-	其他
+	else
 	{
-		t.str [num] = NULL;
+		t.str[num] = NULL;
 		t.size = 0;
 	}
 		
-	返回;
+	return t;
 }
-//插入运算：在串对象小号的POS位置后插入一个串吨
-void String :: Insert（String t，int pos）
+//插入运算:在串对象s的pos位置后插入一个串t
+void String::Insert(String t,int pos)
 {
 		//将此成员函数补充完整，使得程序能够正确运行
-int i，j;
-	if（pos> = 0 && pos <= size）
+int i,j;
+	if (pos >=0 && pos <= size)
 	{
-		for（i = size-1; i> = pos; i--）
+		for ( i = size-1; i >= pos; i--)
 		{
-			str [i + t.size] = str [i];
+			str[i+t.size] = str[i];
 		
 		}
-		for（i = pos，j = 0; i <pos + t.size; i ++，j ++）
+		for ( i = pos, j=0; i < pos+ t.size; i++,j++)
 		{
-			str [i] = t.str [j];
+			str[i] = t.str[j];
 		}
 		size = size + t.size;
 	}
 
 
 }
-//删除：删除串中的一个子串
-void String :: Delete（int pos，int num）
+//删除 :删除串中的一个子串
+void  String:: Delete(int pos,int num)
 { 
 //将此成员函数补充完整，使得程序能够正确运行
 
@@ -142,12 +123,12 @@ int main(int argc, char* argv[])
                s.Delete(pos,num);
                cout<<"删除后的字符串为：   ";
                s.Display();
-             }打破;
-     默认：打破;
-  } //开关
-     cout <<“\ n ---------------------------------”;
-}而（K> = 1 &&ķ<5）;
-  cout <<“\ n再见！”;
-  cout <<“\ n按任意键，返回。”;
-  返回0;
+             }break;
+     default:break;
+  } //switch
+     cout<<"\n--------------------------------- ";
+}while(k>=1&&k<5);
+  cout<<"\n          再见!";
+  cout<<"\n     按任意键，返回。";
+  return 0;
 }

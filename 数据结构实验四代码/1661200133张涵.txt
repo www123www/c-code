@@ -1,0 +1,215 @@
+#include <iostream.h>
+#include <conio.h>
+#include <string>
+
+class String
+{
+	public:
+     String(){};
+     ~String(){};
+     String SubString(int pos,int num);
+     void Insert(String t,int pos);
+     void Delete(int pos,int num);
+     void Creat();
+     void Display();
+	private:
+     char *str;
+     int size;
+ };
+
+ //生成新字符串函数
+void String:: Creat()
+ { 
+	char *s=new char(100); 
+    cin>>s;
+    size=strlen(s);
+    str=new char[size];
+    if(str==0)  cout<<"没有申请到空间！";
+    strcpy(str,s);
+ }
+//输出
+void String::Display()
+{ 
+	int i;
+	for(i=0;i<size;i++)  cout<<str[i];
+	cout<<endl;
+}
+//求子串
+String String::SubString(int pos,int num)
+{ 
+	
+//将此成员函数补充完整，使得程序能够正确运行
+    String s;
+	if (0 <= pos && 0 <= num && (pos+num-1 <= size))
+	{
+		pos = pos - 1;
+		char *sub = new char[num+1];
+
+		for (int i = 0; i < num  ; i++,pos++)
+		{
+			sub[i] = str[pos];
+			cout << sub[i] << endl;
+		}
+
+		sub[num] = '\0';
+
+		s.str = sub;
+
+		cout << "s.str:" << s.str << endl;
+		
+		s.size = num;
+
+		cout << "s.size:" << s.size << endl;
+
+		return s;
+	}
+	else
+	{
+		s.str = "";
+		cout << "位置不对" << endl;
+		return s;
+	}
+}
+//插入运算:在串对象s的pos位置后插入一个串t
+void String::Insert(String t,int pos)
+{
+//将此成员函数补充完整，使得程序能够正确运行
+	const char *cs2 = t.str;
+
+	if (pos > 0 && pos <= size)
+	{
+		//pos = pos - 1;
+
+		int len = size + t.size;
+
+		char *cs = new char[len+1];
+
+		for (int i = 0; i < pos ; i++)
+		{
+			cs[i] = str[i];
+		}
+
+		cs[pos] = '\0';
+
+		int j = 0;
+
+		for (int ii = pos; j < t.size;ii++,j++)
+		{
+			cs[ii] = cs2[j];
+			cout << cs[ii] << endl;
+		}
+
+		cout << cs << endl;
+		
+		int jj = pos + t.size;
+
+		cout << "jj:" << jj << endl;
+
+		for (int i1 = pos; i1 < size ; i1++, jj++)
+		{
+			cs[jj] = str[i1];
+			cout << cs[jj] << endl;
+		}
+		cs[len] = '\0';
+		str = cs;
+		size = len;
+	}
+	else
+	{
+		cout << "插入位置不对" << endl;
+	}
+
+}
+//删除 :删除串中的一个子串
+void  String:: Delete(int pos,int num)
+{ 
+		pos = pos - 1;
+//将此成员函数补充完整，使得程序能够正确运行
+	if (pos >= 0 && (pos + num) <= strlen(str))
+	{
+	
+		int len = size - num;
+		cout << "len:" <<  len << endl;
+
+		char * news = new char[len+1];
+
+		for (int i1 = 0; i1 < pos ; i1++)
+		{
+			news[i1] = str[i1];
+		}
+		
+
+		/*strncpy(news,str,pos);*/
+		news[pos] = '\0';
+
+		cout << "news:" << news << endl;
+
+		int j = pos + num;
+		cout << "j:" << j << endl;
+
+		for (int i = pos; i < len; i++,j++)
+		{
+			news[i] = str[j];
+			cout << news[i] << endl;
+			cout << str[j] << endl;
+		}
+		news[len] = '\0';
+
+		cout << "news:" << news << endl;
+
+		str = news;
+
+		cout << "str:" << str << endl;
+
+		size = len;
+
+		cout << "size:" << size << endl;
+
+		//delete []news;
+	}
+	else
+	{
+		cout << "位置不对" << endl;
+	}
+}
+//主函数
+int main(int argc, char* argv[])
+{  int pos,num,k;
+   String s,s1,t;
+   do{  cout<<"\n\n    1.生成字符串"  ;
+        cout<<"\n\n    2.取子串";
+        cout<<"\n\n    3.插入子串s1";
+        cout<<"\n\n    4.删除子串";
+        cout<<"\n\n    5.结束程序";
+        cout<<"\n******************************** ";
+        cout<<"\n    请输入你的选择(1,2,3,4,5)";  cin>>k;
+  switch(k){
+       case 1:{cout<<"请输入一个字符串：";
+               s.Creat();
+               cout<<"字符串为：       ";     s.Display();
+              }break;
+       case 2:{ cout<<"请输入子串的截取位置pos及子串长度num"<<endl;
+                cin>>pos>>num;
+                t=s.SubString(pos,num);
+                cout<<"你所取的子串为：　　";  t.Display();
+               }break;
+       case 3:{ cout<<"请输入子串插入位置pos"<<endl;
+                cin>>pos;
+                cout<<"请输入要插入的子串:  ";   s1.Creat();
+                s.Insert(s1,pos);
+                cout<<"插入后的字符串为：   ";  s.Display();
+              }break;
+       case 4:{ cout<<"请输入要删除子串的开始位置pos及子串长度num"<<endl;
+               cin>>pos>>num;
+               s.Delete(pos,num);
+               cout<<"删除后的字符串为：   ";
+               s.Display();
+             }break;
+     default:break;
+  } //switch
+     cout<<"\n--------------------------------- ";
+}while(k>=1&&k<5);
+  cout<<"\n          再见!";
+  cout<<"\n     按任意键，返回。";
+  return 0;
+}
